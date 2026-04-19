@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import connectDB from "./config/db.js";
 import userRouter from "./routes/userRoutes.js";
+import roomRouter from "./routes/roomRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import http from "http";
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/auth", userRouter);
+app.use("/room", roomRouter);
 
 const startServer = () => {
   try {

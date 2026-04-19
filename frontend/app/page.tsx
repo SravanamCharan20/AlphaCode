@@ -1,100 +1,59 @@
 import Link from "next/link";
-import { homeFeatures } from "@/data/home-page";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(251,191,36,0.18),_transparent_30%),linear-gradient(180deg,_#fffdf8_0%,_#f6efe2_58%,_#efe5d4_100%)] text-slate-950">
       <SiteHeader />
 
-      <div className="page-shell pb-20 pt-8">
-        <section className="section-space pt-8">
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="eyebrow">Competitive coding platform</p>
-            <h1 className="display-title mt-6 text-5xl font-semibold text-black sm:text-6xl lg:text-7xl">
-              Build, compete, and manage coding sessions in one product.
-            </h1>
-            <p className="body-copy mx-auto mt-6 max-w-2xl text-base sm:text-lg">
-              A cleaner product interface for users who want to sign in, enter
-              the platform, and get straight to the experience.
-            </p>
-
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <Link href="/auth/signup" className="btn-primary">
-                Create account
-              </Link>
-              <Link href="/auth/signin" className="btn-secondary">
-                Sign in
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <section className="section-space pt-4">
-          <div className="hero-panel overflow-hidden p-6 sm:p-8 lg:p-10">
-            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-              <div className="max-w-2xl">
-                <p className="eyebrow">Product preview</p>
-                <h2 className="mt-5 text-3xl font-semibold tracking-[-0.05em] text-black sm:text-5xl">
-                  A simpler front end that behaves like a product, not a brochure.
-                </h2>
-                <p className="body-copy mt-5 max-w-xl text-base">
-                  The landing page stays short, the auth pages stay standard,
-                  and the rest of the product can scale from here.
-                </p>
+      <div className="mx-auto w-full max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8">
+        <section className="relative overflow-hidden rounded-[2rem] border border-white/60 bg-white/75 px-6 py-10 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.45)] backdrop-blur xl:px-10 xl:py-12">
+          <div className="absolute inset-x-0 top-0 h-40 bg-[linear-gradient(135deg,_rgba(251,191,36,0.24),_rgba(249,115,22,0.08),_transparent)]" />
+          <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div className="max-w-3xl">
+              <p className="inline-flex rounded-full border border-amber-300/60 bg-amber-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-amber-700">
+                Multiplayer coding rooms
+              </p>
+              <h1 className="mt-6 text-5xl font-semibold tracking-[-0.08em] text-slate-950 sm:text-6xl lg:text-7xl">
+                Create rooms, fill the lobby, and launch the arena.
+              </h1>
+              <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+                AlphaCode is focused on the actual room flow: room setup, lobby
+                readiness, and contest launch.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center gap-4">
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+                >
+                  Open dashboard
+                </Link>
+                <Link
+                  href="/auth/signin"
+                  className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-950"
+                >
+                  Sign in
+                </Link>
               </div>
+            </div>
 
-              <div className="card p-5 sm:p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-[#6e6e73]">AlphaCode</p>
-                    <p className="mt-1 text-xl font-medium text-black">
-                      Dashboard preview
-                    </p>
-                  </div>
-                  <span className="status-dot" />
+            <div className="rounded-[2rem] border border-slate-200/70 bg-slate-950 p-6 text-white shadow-[0_20px_70px_-35px_rgba(15,23,42,0.9)]">
+              <div className="grid gap-4">
+                <div className="rounded-[1.4rem] border border-white/10 bg-white/6 p-5">
+                  <p className="text-sm text-slate-400">1. Configure</p>
+                  <p className="mt-2 text-xl font-semibold">Members and questions</p>
                 </div>
-
-                <div className="mt-6 rounded-[1.5rem] border border-black/6 bg-white/80 p-5">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm text-[#6e6e73]">Active session</p>
-                      <p className="mt-2 text-2xl font-medium tracking-[-0.04em] text-black">
-                        Signed in
-                      </p>
-                    </div>
-                    <div className="rounded-full bg-black px-3 py-1 text-xs text-white">
-                      Live
-                    </div>
-                  </div>
-
-                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-2xl bg-[#f5f5f7] p-4">
-                      <p className="text-sm text-[#6e6e73]">Contests</p>
-                      <p className="mt-2 text-lg font-medium text-black">Ready</p>
-                    </div>
-                    <div className="rounded-2xl bg-[#f5f5f7] p-4">
-                      <p className="text-sm text-[#6e6e73]">Ranking</p>
-                      <p className="mt-2 text-lg font-medium text-black">Ready</p>
-                    </div>
-                  </div>
+                <div className="rounded-[1.4rem] border border-white/10 bg-white/6 p-5">
+                  <p className="text-sm text-slate-400">2. Lobby</p>
+                  <p className="mt-2 text-xl font-semibold">Track ready and not ready</p>
+                </div>
+                <div className="rounded-[1.4rem] border border-white/10 bg-white/6 p-5">
+                  <p className="text-sm text-slate-400">3. Arena</p>
+                  <p className="mt-2 text-xl font-semibold">Bring all members into contest view</p>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        <section className="section-space pt-4">
-          <div className="grid gap-5 lg:grid-cols-3">
-            {homeFeatures.map((item) => (
-              <article key={item.title} className="card p-7">
-                <p className="text-2xl font-medium tracking-[-0.04em] text-black">
-                  {item.title}
-                </p>
-                <p className="body-copy mt-4 text-sm">{item.detail}</p>
-              </article>
-            ))}
           </div>
         </section>
       </div>

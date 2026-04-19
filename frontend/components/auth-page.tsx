@@ -62,15 +62,34 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(251,191,36,0.18),_transparent_24%),linear-gradient(180deg,_#fffdf8_0%,_#f7efe3_50%,_#efe5d5_100%)]">
       <SiteHeader />
 
-      <div className="page-shell flex min-h-[calc(100vh-120px)] items-center justify-center pb-16 pt-8">
-        <div className="w-full max-w-md">
-          <div className="card p-7 sm:p-8">
-            <div className="text-center">
-              <p className="eyebrow">{activeContent.subtitle}</p>
-              <h1 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-black">
+      <div className="mx-auto flex min-h-[calc(100vh-120px)] w-full max-w-7xl items-center justify-center px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+        <div className="grid w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 shadow-[0_30px_90px_-45px_rgba(15,23,42,0.45)] backdrop-blur lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="relative hidden overflow-hidden bg-slate-950 p-10 text-white lg:block">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(251,191,36,0.28),_transparent_34%),radial-gradient(circle_at_bottom_right,_rgba(249,115,22,0.2),_transparent_30%)]" />
+            <div className="relative">
+              <p className="inline-flex rounded-full border border-white/15 bg-white/8 px-4 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200">
+                {activeContent.subtitle}
+              </p>
+              <h1 className="mt-6 text-4xl font-semibold tracking-[-0.07em]">
+                {mode === "signup"
+                  ? "Create your AlphaCode identity."
+                  : "Step back into your coding workspace."}
+              </h1>
+              <p className="mt-5 max-w-md text-base leading-7 text-slate-300">
+                Sign in and move straight into rooms, lobby, and contest flow.
+              </p>
+            </div>
+          </div>
+
+          <div className="p-7 sm:p-10">
+            <div className="max-w-md">
+              <p className="inline-flex rounded-full border border-amber-300/60 bg-amber-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-amber-700">
+                {activeContent.subtitle}
+              </p>
+              <h1 className="mt-4 text-3xl font-semibold tracking-[-0.06em] text-slate-950">
                 {activeContent.title}
               </h1>
             </div>
@@ -78,9 +97,11 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
             <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
               {mode === "signup" ? (
                 <label className="block">
-                  <span className="mb-2 block text-sm text-[#1d1d1f]">Username</span>
+                  <span className="mb-2 block text-sm font-medium text-slate-800">
+                    Username
+                  </span>
                   <input
-                    className="input-field"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-amber-400 focus:bg-white focus:ring-4 focus:ring-amber-100"
                     name="username"
                     placeholder="Enter username"
                     value={formData.username}
@@ -96,9 +117,11 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
               ) : null}
 
               <label className="block">
-                <span className="mb-2 block text-sm text-[#1d1d1f]">Email</span>
+                <span className="mb-2 block text-sm font-medium text-slate-800">
+                  Email
+                </span>
                 <input
-                  className="input-field"
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-amber-400 focus:bg-white focus:ring-4 focus:ring-amber-100"
                   type="email"
                   name="email"
                   placeholder="you@example.com"
@@ -114,9 +137,11 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
               </label>
 
               <label className="block">
-                <span className="mb-2 block text-sm text-[#1d1d1f]">Password</span>
+                <span className="mb-2 block text-sm font-medium text-slate-800">
+                  Password
+                </span>
                 <input
-                  className="input-field"
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-amber-400 focus:bg-white focus:ring-4 focus:ring-amber-100"
                   type="password"
                   name="password"
                   placeholder="Enter password"
@@ -133,7 +158,7 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
               </label>
 
               {mode === "signup" ? (
-                <p className="text-sm text-[#6e6e73]">
+                <p className="text-sm text-slate-500">
                   Use at least 6 characters with upper, lower, and a number.
                 </p>
               ) : null}
@@ -152,16 +177,19 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
 
               <button
                 type="submit"
-                className="btn-primary w-full"
+                className="inline-flex w-full items-center justify-center rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70"
                 disabled={isPending}
               >
                 {isPending ? "Please wait..." : activeContent.cta}
               </button>
             </form>
 
-            <p className="mt-6 text-center text-sm text-[#6e6e73]">
+            <p className="mt-6 text-center text-sm text-slate-500">
               {activeContent.switchLabel}{" "}
-              <Link href={activeContent.switchHref} className="text-black">
+              <Link
+                href={activeContent.switchHref}
+                className="font-medium text-slate-950 transition hover:text-amber-700"
+              >
                 {activeContent.switchCta}
               </Link>
             </p>
