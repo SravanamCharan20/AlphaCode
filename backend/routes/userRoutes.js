@@ -1,7 +1,7 @@
 import express from "express";
-import User from "../models/user.js";
+import User from "../models/User.js";
 import jwt from "jsonwebtoken";
-import { userAuth } from "../config/auth.js";
+import { adminAuth, userAuth } from "../config/auth.js";
 
 const userRouter = express.Router();
 
@@ -102,8 +102,22 @@ userRouter.get("/profile", userAuth, async (req, res) => {
   }
 });
 
+userRouter.get("/admin/profile", adminAuth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching admin profile" });
+  }
+});
+
 userRouter.post("/logout", (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
   res.json({ message: "Logged out successfully" });
 });
 

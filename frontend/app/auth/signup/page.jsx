@@ -1,11 +1,5 @@
-import React from 'react'
+import { AuthPage } from "@/components/auth-page";
 
-const Signup = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+export default function Signup() {
+  return <AuthPage mode="signup" />;
 }
-
-export default Signup

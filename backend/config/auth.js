@@ -22,3 +22,15 @@ export const userAuth = (req, res, next) => {
     });
   }
 };
+
+export const adminAuth = (req, res, next) => {
+  userAuth(req, res, () => {
+    if (req.user?.role !== "admin") {
+      return res.status(403).json({
+        message: "Forbidden - Admin access only",
+      });
+    }
+
+    next();
+  });
+};
