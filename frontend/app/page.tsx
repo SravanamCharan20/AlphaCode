@@ -1,21 +1,7 @@
 import Link from "next/link";
+import { homeFeatures } from "@/data/home-page";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-
-const features = [
-  {
-    title: "Fast entry",
-    detail: "Users go from landing to account to dashboard without extra noise.",
-  },
-  {
-    title: "Clean dashboard",
-    detail: "A focused product surface with room for contests, rankings, and history.",
-  },
-  {
-    title: "Backend ready",
-    detail: "The frontend stays connected to your existing auth flow and session model.",
-  },
-];
 
 export default function Home() {
   return (
@@ -101,7 +87,7 @@ export default function Home() {
 
         <section className="section-space pt-4">
           <div className="grid gap-5 lg:grid-cols-3">
-            {features.map((item) => (
+            {homeFeatures.map((item) => (
               <article key={item.title} className="card p-7">
                 <p className="text-2xl font-medium tracking-[-0.04em] text-black">
                   {item.title}

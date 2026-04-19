@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { useUser } from "@/app/auth/userContext";
+import { useAuth } from "@/context/auth-context";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();
-  const { logout, user } = useUser();
+  const { logout, user } = useAuth();
   const [isPending, startTransition] = useTransition();
   const isAdmin = user?.role === "admin";
 

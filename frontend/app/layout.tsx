@@ -1,23 +1,6 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { UserProvider } from "@/app/auth/userContext";
+import { AuthProvider } from "@/context/auth-context";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "AlphaCode",
-  description:
-    "Professional competitive coding frontend with a clean, restrained product aesthetic.",
-};
 
 export default function RootLayout({
   children,
@@ -27,10 +10,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <UserProvider>{children}</UserProvider>
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

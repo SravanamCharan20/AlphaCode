@@ -5,10 +5,14 @@ import connectDB from "./config/db.js";
 import userRouter from "./routes/userRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import http from "http";
+import { createSocketServer } from "./socket/createSocketServer.js";
 
 const app = express();
 const PORT = process.env.PORT || "9999";
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+const server = http.createServer(app);
+createSocketServer(server, FRONTEND_URL, process.env.JWT_SECRET);
 
 app.use(
   cors({
@@ -24,7 +28,7 @@ app.use("/auth", userRouter);
 const startServer = () => {
   try {
     connectDB();
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log(`server is running at ${PORT}`);
     });
   } catch (error) {

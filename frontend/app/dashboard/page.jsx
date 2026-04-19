@@ -3,23 +3,17 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { dashboardNextSteps, getRoleLabel } from "@/data/dashboard";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { useUser } from "@/app/auth/userContext";
-
-const nextSteps = [
-  "Connect live contest listings.",
-  "Add rank and submission history.",
-  "Introduce real queue and room state.",
-];
+import { useAuth } from "@/context/auth-context";
 
 export default function Dashboard() {
   const router = useRouter();
-  const { isBootstrapping, user } = useUser();
+  const { isBootstrapping, user } = useAuth();
   const displayName =
     user?.username?.trim() || user?.email?.split("@")[0] || "Coder";
-  const roleLabel =
-    user?.role === "admin" ? "Administrator" : user?.role === "user" ? "Member" : "User";
+  const roleLabel = getRoleLabel(user?.role);
   const summary = [
     {
       label: "Account",
@@ -156,7 +150,7 @@ export default function Dashboard() {
               <article className="card p-7 sm:p-8">
                 <p className="eyebrow">Next</p>
                 <div className="mt-6 space-y-4">
-                  {nextSteps.map((item) => (
+                  {dashboardNextSteps.map((item) => (
                     <div
                       key={item}
                       className="rounded-[1.25rem] border border-black/6 bg-white/72 px-4 py-4"

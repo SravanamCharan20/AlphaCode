@@ -3,19 +3,14 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { adminActions } from "@/data/dashboard";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { useUser } from "@/app/auth/userContext";
-
-const adminActions = [
-  "Manage contests and queue configuration.",
-  "Review user accounts and role assignments.",
-  "Add analytics, moderation, and reporting tools here.",
-];
+import { useAuth } from "@/context/auth-context";
 
 export default function AdminPage() {
   const router = useRouter();
-  const { isBootstrapping, user } = useUser();
+  const { isBootstrapping, user } = useAuth();
   const displayName =
     user?.username?.trim() || user?.email?.split("@")[0] || "Admin";
 

@@ -3,46 +3,19 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
-import { useUser } from "@/app/auth/userContext";
+import { authPageContent } from "@/data/auth-page";
+import { useAuth } from "@/context/auth-context";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import type { SigninInput, SignupInput } from "@/types/auth";
 
 type AuthMode = "signin" | "signup";
 
-const content = {
-  signin: {
-    title: "Sign in",
-    subtitle: "Access your account",
-    cta: "Sign in",
-    switchLabel: "Need an account?",
-    switchCta: "Create one",
-    switchHref: "/auth/signup",
-  },
-  signup: {
-    title: "Create account",
-    subtitle: "Get started with AlphaCode",
-    cta: "Create account",
-    switchLabel: "Already have an account?",
-    switchCta: "Sign in",
-    switchHref: "/auth/signin",
-  },
-} satisfies Record<
-  AuthMode,
-  {
-    title: string;
-    subtitle: string;
-    cta: string;
-    switchLabel: string;
-    switchCta: string;
-    switchHref: string;
-  }
->;
-
 export function AuthPage({ mode }: { mode: AuthMode }) {
   const router = useRouter();
-  const { isBootstrapping, signin, signup, user } = useUser();
+  const { isBootstrapping, signin, signup, user } = useAuth();
   const [isPending, startTransition] = useTransition();
-  const [formData, setFormData] = useState<Record<string, string>>({
+  const [formData, setFormData] = useState<SignupInput>({
     username: "",
     email: "",
     password: "",
@@ -56,7 +29,7 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
     }
   }, [isBootstrapping, router, user]);
 
-  const activeContent = content[mode];
+  const activeContent = authPageContent[mode];
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -65,17 +38,14 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
 
     try {
       if (mode === "signup") {
-        await signup({
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
-        });
+        await signup(formData);
         setSuccess("Account created. Redirecting...");
       } else {
-        await signin({
+        const signinPayload: SigninInput = {
           email: formData.email,
           password: formData.password,
-        });
+        };
+        await signin(signinPayload);
         setSuccess("Signed in. Redirecting...");
       }
 
